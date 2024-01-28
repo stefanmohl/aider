@@ -13,13 +13,13 @@ import yaml
 import openai
 from jsonschema import Draft7Validator
 from rich.console import Console, Text
-from rich.live import Live
 from rich.markdown import Markdown
 
 from aider import models, prompts, utils
 from aider.commands import Commands
 from aider.history import ChatSummary
 from aider.io import InputOutput
+from aider.mdstream import MarkdownStream
 from aider.repo import GitRepo
 from aider.repomap import RepoMap
 from aider.sendchat import send_with_retries
@@ -729,14 +729,13 @@ class Coder:
             self.io.tool_output(tokens)
 
     def show_send_output_stream(self, completion):
-        live = None
         if self.show_pretty():
-            live = Live(vertical_overflow="scroll")
+            mdargs = dict(style=self.assistant_output_color, code_theme=self.code_theme)
+            mdstream = MarkdownStream(mdargs=mdargs)
+        else:
+            mdstream = None
 
         try:
-            if live:
-                live.start()
-
             for chunk in completion:
                 if len(chunk.choices) == 0:
                     continue
@@ -766,22 +765,20 @@ class Coder:
                     text = None
 
                 if self.show_pretty():
-                    self.live_incremental_response(live, False)
+                    self.live_incremental_response(mdstream, False)
                 elif text:
                     sys.stdout.write(text)
                     sys.stdout.flush()
         finally:
-            if live:
-                self.live_incremental_response(live, True)
-                live.stop()
+            if mdstream:
+                self.live_incremental_response(mdstream, True)
 
-    def live_incremental_response(self, live, final):
+    def live_incremental_response(self, mdstream, final):
         show_resp = self.render_incremental_response(final)
         if not show_resp:
             return
 
-        md = Markdown(show_resp, style=self.assistant_output_color, code_theme=self.code_theme)
-        live.update(md)
+        mdstream.update(show_resp, final=final)
 
     def render_incremental_response(self, final):
         return self.partial_response_content
