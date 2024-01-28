@@ -207,7 +207,7 @@ class Coder:
             if map_tokens > max_map_tokens:
                 self.io.tool_error(
                     f"Warning: map-tokens > {max_map_tokens} is not recommended as too much"
-                    " irrelevant code can confused GPT."
+                    " irrelevant code can confuse GPT."
                 )
         else:
             self.io.tool_output("Repo-map: disabled because map_tokens == 0")
@@ -1017,7 +1017,7 @@ def check_model_availability(io, client, main_model):
     except openai.NotFoundError:
         # Azure sometimes returns 404?
         # https://discord.com/channels/1131200896827654144/1182327371232186459
-        io.tool_error("Unable to list available models, proceeding with {main_model.name}")
+        io.tool_error(f"Unable to list available models, proceeding with {main_model.name}")
         return True
 
     model_ids = sorted(model.id for model in available_models)
