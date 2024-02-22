@@ -1,14 +1,28 @@
 # Release history
 
-### main
+### v0.24.1
 
+- Fixed bug with cost computations when --no-steam in effect
+
+### v0.24.0
+
+- New `/web <url>` command which scrapes the url, turns it into fairly clean markdown and adds it to the chat.
+- Updated all OpenAI model names, pricing info
+- Default GPT 3.5 model is now `gpt-3.5-turbo-0125`.
+- Bugfix to the `!` alias for `/run`.
+
+### v0.23.0
+
+- Added support for `--model gpt-4-0125-preview` and OpenAI's alias `--model gpt-4-turbo-preview`. The `--4turbo` switch remains an alias for `--model gpt-4-1106-preview` at this time.
+- New `/test` command that runs a command and adds the output to the chat on non-zero exit status.
 - Improved streaming of markdown to the terminal.
 - Added `/quit` as alias for `/exit`.
 - Added `--skip-check-update` to skip checking for the update on launch.
+- Added `--openrouter` as a shortcut for `--openai-api-base https://openrouter.ai/api/v1`
+- Fixed bug preventing use of env vars `OPENAI_API_BASE, OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_API_DEPLOYMENT_ID`.
 
 ### v0.22.0
 
-- New `/test` command that runs a command and adds the output to the chat on non-zero exit status.
 - Improvements for unified diff editing format.
 - Added ! as an alias for /run.
 - Autocomplete for /add and /drop now properly quotes filenames with spaces.

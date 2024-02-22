@@ -1,6 +1,10 @@
 theme: jekyll-theme-cayman
 url: "https://aider.chat"
 
+plugins:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+
 defaults:
   - scope:
       path: "README.md"

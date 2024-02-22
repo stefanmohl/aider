@@ -1,7 +1,11 @@
-
+---
+title: Building a better repository map with tree sitter
+excerpt: Tree-sitter allows aider to build a repo map that better summarizes large code bases.
+highlight_image: /assets/robot-ast.png
+---
 # Building a better repository map with tree sitter
 
-![robot flowchat](../assets/robot-ast.png)
+![robot flowchat](/assets/robot-ast.png)
 
 GPT-4 is extremely useful for "self-contained" coding tasks,
 like generating or modifying a simple function

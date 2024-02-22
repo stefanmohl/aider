@@ -72,12 +72,11 @@ class Coder:
 
         if not skip_model_availabily_check and not main_model.always_available:
             if not check_model_availability(io, client, main_model):
-                fallback_model = models.GPT35_1106
-                if main_model != models.GPT4:
-                    io.tool_error(
-                        f"API key does not support {main_model.name}, falling back to"
-                        f" {fallback_model.name}"
-                    )
+                fallback_model = models.GPT35_0125
+                io.tool_error(
+                    f"API key does not support {main_model.name}, falling back to"
+                    f" {fallback_model.name}"
+                )
                 main_model = fallback_model
 
         if edit_format is None:
@@ -711,7 +710,8 @@ class Coder:
             tokens = f"{prompt_tokens} prompt tokens, {completion_tokens} completion tokens"
             if self.main_model.prompt_price:
                 cost = prompt_tokens * self.main_model.prompt_price / 1000
-                cost += completion_tokens * self.main_model.completion_price / 1000
+                if self.main_model.completion_price:
+                    cost += completion_tokens * self.main_model.completion_price / 1000
                 tokens += f", ${cost:.6f} cost"
                 self.total_cost += cost
 

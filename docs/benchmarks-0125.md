@@ -1,6 +1,11 @@
-# Lazy coding benchmark for gpt-4-0125-preview
+---
+title: The January GPT-4 Turbo is lazier than the last version
+excerpt: The new `gpt-4-0125-preview` model is quantiatively lazier at coding than previous GPT-4 versions, according to a new "laziness" benchmark.
+highlight_image: /assets/benchmarks-0125.svg
+---
+# The January GPT-4 Turbo is lazier than the last version
 
-[![benchmark results](../assets/benchmarks-0125.svg)](https://aider.chat/assets/benchmarks-0125.svg)
+[![benchmark results](/assets/benchmarks-0125.svg)](https://aider.chat/assets/benchmarks-0125.svg)
 
 [OpenAI just released a new version of GPT-4 Turbo](https://openai.com/blog/new-embedding-models-and-api-updates).
 This new model is intended to reduce the "laziness" that has been widely observed with the previous `gpt-4-1106-preview` model:
